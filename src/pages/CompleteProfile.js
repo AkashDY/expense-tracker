@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
+import AuthContext from "../components/store/auth-context";
 
 const CompleteProfile = () => {
   const [name, setName] = useState("");
   const [profilePicture, setProfilePicture] = useState(null);
   const history = useHistory();
+
+  const authCtx = useContext(AuthContext);
 
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -28,6 +31,7 @@ const CompleteProfile = () => {
     } catch (error) {
       console.error(error);
     }
+    authCtx.completeProfile();
     history.push("/");
     
   };

@@ -38,10 +38,23 @@ const MainNavigation = () => {
               <button onClick={logoutHandler}>Logout</button>
             </li>
           )}
-          {isLoggedIn && !isProfileComplete && (
+          {/* {isLoggedIn && !isProfileComplete && (
             <li>
               <span>Your profile is incomplete</span>
               <button onClick={() => history.push("/completeprofile")}>Complete profile</button>
+            </li>
+          )} */}
+          {isLoggedIn && !isProfileComplete && (
+            <li>
+              <span>Your profile is incomplete</span>
+              <button onClick={() => history.push("/completeprofile")}>
+                Complete profile
+              </button>
+            </li>
+          )}
+          {isLoggedIn && isProfileComplete && (
+            <li>
+              <span>Your profile is complete</span>
             </li>
           )}
         </ul>

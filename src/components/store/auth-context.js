@@ -6,11 +6,13 @@ const AuthContext = React.createContext({
   isProfileComplete: false,
   login: (token) => {},
   logout: () => {},
+  completeProfile: () => {},
 });
 
 export const AuthContextProvider = (props) => {
   const initialToken = localStorage.getItem('token');
   const [token, setToken] = useState(initialToken);
+  const [isProfileComplete, setIsProfileComplete] = useState(false);
 
   const userIsLoggedIn = !!token;
 
@@ -21,14 +23,21 @@ export const AuthContextProvider = (props) => {
 
   const logoutHandler = () => {
     setToken(null);
+    setIsProfileComplete(false);
     localStorage.removeItem('token');
+  };
+
+  const completeProfileHandler = () => {
+    setIsProfileComplete(true);
   };
 
   const contextValue = {
     token: token,
     isLoggedIn: userIsLoggedIn,
+    isProfileComplete: isProfileComplete,
     login: loginHandler,
     logout: logoutHandler,
+    completeProfile: completeProfileHandler,
   };
 
   return (
