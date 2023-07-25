@@ -7,6 +7,7 @@ import HomePage from "./pages/HomePage";
 import { useContext } from "react";
 import AuthContext from "./components/store/auth-context";
 import CompleteProfile from "./pages/CompleteProfile";
+import VerifyEmailPage from "./pages/VerifyEmailPage";
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -28,6 +29,10 @@ function App() {
         </Route>
         <Route path="/completeprofile">
           {authCtx.isLoggedIn && <CompleteProfile />}
+          {!authCtx.isLoggedIn && <Redirect to="/auth" />}
+        </Route>
+        <Route path="/verify-email">
+          {authCtx.isLoggedIn && <VerifyEmailPage />}
           {!authCtx.isLoggedIn && <Redirect to="/auth" />}
         </Route>
         <Route path="*">

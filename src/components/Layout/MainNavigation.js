@@ -3,14 +3,14 @@ import { Link, useHistory } from "react-router-dom";
 import classes from "./MainNavigation.module.css";
 import { useContext } from "react";
 import AuthContext from "../store/auth-context";
-import CompleteProfile from "../../pages/CompleteProfile";
 
 const MainNavigation = () => {
   const history = useHistory();
   const authCtx = useContext(AuthContext);
-
+  
   const isLoggedIn = authCtx.isLoggedIn;
   const isProfileComplete = authCtx.isProfileComplete;
+  const isEmailVerified = authCtx.isEmailVerified;
 
   const logoutHandler = () => {
     authCtx.logout();
@@ -38,15 +38,11 @@ const MainNavigation = () => {
               <button onClick={logoutHandler}>Logout</button>
             </li>
           )}
-          {/* {isLoggedIn && !isProfileComplete && (
-            <li>
-              <span>Your profile is incomplete</span>
-              <button onClick={() => history.push("/completeprofile")}>Complete profile</button>
-            </li>
-          )} */}
           {isLoggedIn && !isProfileComplete && (
             <li>
-              <span>Your profile is incomplete</span>
+              <span style={{ color: "white" }}>
+                Your profile is incomplete{" "}
+              </span>
               <button onClick={() => history.push("/completeprofile")}>
                 Complete profile
               </button>
@@ -54,7 +50,12 @@ const MainNavigation = () => {
           )}
           {isLoggedIn && isProfileComplete && (
             <li>
-              <span>Your profile is complete</span>
+              <span style={{ color: "white" }}>Your profile is complete </span>
+            </li>
+          )}
+          {isLoggedIn && !isEmailVerified && (
+            <li>
+              <Link to="/verify-email">Verify Email</Link>
             </li>
           )}
         </ul>
