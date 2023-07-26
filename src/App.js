@@ -8,6 +8,8 @@ import { useContext } from "react";
 import AuthContext from "./components/store/auth-context";
 import CompleteProfile from "./pages/CompleteProfile";
 import VerifyEmailPage from "./pages/VerifyEmailPage";
+import ExpenseForm from "./components/Auth/ExpenseForm";
+import ExpensePage from "./pages/ExpensePage";
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -37,6 +39,10 @@ function App() {
         </Route>
         <Route path="*">
           <Redirect to="/" />
+        </Route>
+        <Route path="/add-expense">
+          {authCtx.isLoggedIn && <ExpensePage />}
+          {!authCtx.isLoggedIn && <Redirect to="/auth" />}
         </Route>
       </>
     </Layout>

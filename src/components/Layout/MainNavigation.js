@@ -7,7 +7,7 @@ import AuthContext from "../store/auth-context";
 const MainNavigation = () => {
   const history = useHistory();
   const authCtx = useContext(AuthContext);
-  
+
   const isLoggedIn = authCtx.isLoggedIn;
   const isProfileComplete = authCtx.isProfileComplete;
   const isEmailVerified = authCtx.isEmailVerified;
@@ -30,7 +30,7 @@ const MainNavigation = () => {
           )}
           {isLoggedIn && (
             <li>
-              <Link to="/profile">Profile</Link>
+              <Link to="/profile">Change Password</Link>
             </li>
           )}
           {isLoggedIn && (
@@ -56,6 +56,11 @@ const MainNavigation = () => {
           {isLoggedIn && !isEmailVerified && (
             <li>
               <Link to="/verify-email">Verify Email</Link>
+            </li>
+          )}
+          {isLoggedIn && (
+            <li>
+              <Link to="/add-expense">Add Expense +</Link>
             </li>
           )}
         </ul>
