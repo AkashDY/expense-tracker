@@ -36,11 +36,11 @@ const ExpenseForm = (props) => {
         style={{
           display: "flex",
           justifyContent: "space-around",
-          width: "100%",
+          width: "50%",
           margin: "10px",
           justifyItems: "center",
           fontSize: "60px",
-          color: "green",
+          color: "black",
         }}
       >
         <h2>Add Expense</h2>

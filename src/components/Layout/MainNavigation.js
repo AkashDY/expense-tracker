@@ -23,6 +23,11 @@ const MainNavigation = () => {
       </Link>
       <nav>
         <ul>
+          {isLoggedIn && (
+            <li>
+              <Link to="/add-expense">Add Expense +</Link>
+            </li>
+          )}
           {!isLoggedIn && (
             <li>
               <Link to="/auth">Login</Link>
@@ -56,11 +61,6 @@ const MainNavigation = () => {
           {isLoggedIn && !isEmailVerified && (
             <li>
               <Link to="/verify-email">Verify Email</Link>
-            </li>
-          )}
-          {isLoggedIn && (
-            <li>
-              <Link to="/add-expense">Add Expense +</Link>
             </li>
           )}
         </ul>

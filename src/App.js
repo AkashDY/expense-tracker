@@ -8,7 +8,6 @@ import { useContext } from "react";
 import AuthContext from "./components/store/auth-context";
 import CompleteProfile from "./pages/CompleteProfile";
 import VerifyEmailPage from "./pages/VerifyEmailPage";
-import ExpenseForm from "./components/Auth/ExpenseForm";
 import ExpensePage from "./pages/ExpensePage";
 
 function App() {

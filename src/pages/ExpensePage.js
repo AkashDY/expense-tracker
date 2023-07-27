@@ -1,14 +1,43 @@
 import React from "react";
 import ExpenseForm from "../components/Auth/ExpenseForm";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const ExpensePage = () => {
   const [expenses, setExpenses] = useState([]);
-  const handleFormSubmit = (formData) => {
-    // Process the form data or send it to the server
-    console.log(formData);
-    setExpenses((prevExpenses) => [...prevExpenses, formData]);
+
+  const fetchExpenses = async () => {
+    try {
+      const response = await axios.get(
+        "https://expensetracker-d6e25-default-rtdb.firebaseio.com/expenses.json"
+      );
+      const expensesData = response.data;
+      const expensesArray = [];
+      for (const key in expensesData) {
+        expensesArray.push(expensesData[key]);
+      }
+      setExpenses(expensesArray);
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  useEffect(() => {
+    fetchExpenses();
+  }, []);
+
+  const handleFormSubmit = async (formData) => {
+    try {
+      await axios.post(
+        "https://expensetracker-d6e25-default-rtdb.firebaseio.com/expenses.json",
+        formData
+      );
+      setExpenses((prevExpenses) => [...prevExpenses, formData]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       <ExpenseForm onSubmit={handleFormSubmit} />
@@ -28,3 +57,4 @@ const ExpensePage = () => {
 };
 
 export default ExpensePage;
+
