@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./ExpenseForm.module.css";
 import { FaAngleDown, FaAngleRight } from "react-icons/fa";
 
@@ -10,6 +10,15 @@ const ExpenseForm = (props) => {
   const [category, setCategory] = useState(categories[0]);
   const [date, setDate] = useState("");
   const [expanded, setExpanded] = useState(false);
+
+  useEffect(() => {
+    if (props.editExpense) {
+      setMoney(props.editExpense.amount);
+      setDescription(props.editExpense.description);
+      setCategory(props.editExpense.category);
+      setDate(props.editExpense.date);
+    }
+  }, [props.editExpense]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -97,7 +106,7 @@ const ExpenseForm = (props) => {
             />
           </div>
 
-          <button type="submit">Add expense</button>
+          <button type="submit">{props.editExpense ? "Update" : "Add expense"}</button>
         </form>
       )}
     </div>
